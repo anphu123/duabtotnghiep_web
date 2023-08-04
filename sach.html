@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin - Quản lý Sách, Truyện</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        form {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background-color: #ccc;
+            margin: 30px 0;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        /* Styling for the navigation menu */
+        .nav-menu {
+            background-color: #333;
+            padding: 10px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin-right: 10px;
+        }
+
+        .nav-menu a:hover {
+            background-color: #555;
+        }
+
+        /* Styling for book/truyện list */
+        .book-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .book-item {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .book-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .book-image {
+            max-width: 200px;
+            max-height: 200px;
+            margin-bottom: 10px;
+        }
+
+        .book-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .nav-menu1 {
+            background-color: #f2f2f2;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+
+        .nav-menu1 a {
+            text-decoration: none;
+            color: #333;
+            padding: 8px 16px;
+        }
+
+        .nav-menu1 a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-menu1">
+        <a href="home.html" >Trang chủ</a>
+        <a href="sach.html" >  Sách</a>
+        <a href="#" id="stories-link">Truyện</a>
+        <a href="#" id="users-link">Người dùng</a>
+    </div>
+    <div class="nav-menu">
+        <a href="sach.html" > Thêm Sách</a>
+        <a href="#" id="books-link">Danh sách Sách</a>
+        
+    </div>
+    <h1>Quản lý Sách, Truyện</h1>
+    <div id="content">
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+            <h2>Tải lên sách/truyện:</h2>
+            <label for="book_title">Tiêu đề sách/truyện:</label>
+            <input type="text" id="book_title" name="book_title" required><br>
+
+            <label for="author_name">Tên tác giả:</label>
+            <input type="text" id="author_name" name="author_name" required><br>
+
+            <label for="pdf">Tải lên PDF:</label>
+            <input type="file" id="pdf" name="pdf" accept=".pdf" required><br>
+
+            <label for="image">Tải lên hình ảnh:</label>
+            <input type="file" id="image" name="image" accept="image/*" required><br>
+
+            <label for="book_description">Mô tả sách/truyện:</label><br>
+            <textarea id="book_description" name="book_description" rows="5" cols="40"></textarea><br>
+
+            <input type="submit" value="Tải lên">
+        </form>
+    </div>
+    <script>
+        // JavaScript code
+        const booksLink = document.getElementById('books-link');
+        const storiesLink = document.getElementById('stories-link');
+        const usersLink = document.getElementById('users-link');
+        const contentDiv = document.getElementById('content');
+
+        // Xử lý khi click vào link "Sách"
+        booksLink.addEventListener('click', () => {
+            fetchBooks(); // Gọi API để lấy thông tin sách từ backend
+        });
+
+        // Xử lý khi click vào link "Truyện"
+        storiesLink.addEventListener('click', () => {
+            fetchStories(); // Gọi API để lấy thông tin truyện từ backend
+        });
+
+        // Xử lý khi click vào link "Người dùng"
+        usersLink.addEventListener('click', () => {
+            fetchUsers(); // Gọi API để lấy thông tin người dùng từ backend
+        });
+
+        // Hàm gọi API để lấy thông tin sách từ backend
+        function fetchBooks() {
+            // Gọi API ở đây và xử lý dữ liệu trả về để hiển thị danh sách sách
+            const books = [
+                { id: 1, title: 'Sách 1', author: 'Tác giả A' },
+                { id: 2, title: 'Sách 2', author: 'Tác giả B' },
+                // Các sách khác
+            ];
+
+            displayBooks(books);
+        }
+
+        // Hàm hiển thị danh sách sách lên giao diện
+        function displayBooks(books) {
+            const content = document.createElement('div');
+            content.innerHTML = '<h2>Danh sách Sách:</h2>';
+            const bookList = document.createElement('ul');
+            bookList.className = 'book-list';
+
+            books.forEach((book) => {
+                const bookItem = document.createElement('li');
+                bookItem.className = 'book-item';
+                bookItem.innerHTML = `
+                      <div class="book-title">${book.title}</div>
+                      <div>Author: ${book.author}</div>
+                  `;
+                bookList.appendChild(bookItem);
+            });
+
+            content.appendChild(bookList);
+            updateContent(content);
+        }
+
+        // Hàm gọi API để lấy thông tin truyện từ backend
+        function fetchStories() {
+            // Gọi API ở đây và xử lý dữ liệu trả về để hiển thị danh sách truyện
+            const stories = [
+                { id: 1, title: 'Truyện 1', author: 'Tác giả X' },
+                { id: 2, title: 'Truyện 2', author: 'Tác giả Y' },
+                // Các truyện khác
+            ];
+
+            displayStories(stories);
+        }
+
+        // Hàm hiển thị danh sách truyện lên giao diện
+        function displayStories(stories) {
+            const content = document.createElement('div');
+            content.innerHTML = '<h2>Danh sách Truyện:</h2>';
+            const storyList = document.createElement('ul');
+            storyList.className = 'book-list';
+
+            stories.forEach((story) => {
+                const storyItem = document.createElement('li');
+                storyItem.className = 'book-item';
+                storyItem.innerHTML = `
+                      <div class="book-title">${story.title}</div>
+                      <div>Author: ${story.author}</div>
+                  `;
+                storyList.appendChild(storyItem);
+            });
+
+            content.appendChild(storyList);
+            updateContent(content);
+        }
+
+        // Hàm gọi API để lấy thông tin người dùng từ backend
+        function fetchUsers() {
+            // Gọi API ở đây và xử lý dữ liệu trả về để hiển thị danh sách người dùng
+            const users = [
+                { id: 1, name: 'Người dùng 1' },
+                { id: 2, name: 'Người dùng 2' },
+                // Các người dùng khác
+            ];
+
+            displayUsers(users);
+        }
+
+        // Hàm hiển thị danh sách người dùng lên giao diện
+        function displayUsers(users) {
+            const content = document.createElement('div');
+            content.innerHTML = '<h2>Danh sách Người dùng:</h2>';
+            const userList = document.createElement('ul');
+
+            users.forEach((user) => {
+                const userItem = document.createElement('li');
+                userItem.innerHTML = user.name;
+                userList.appendChild(userItem);
+            });
+
+            content.appendChild(userList);
+            updateContent(content);
+        }
+
+        // Hàm cập nhật nội dung trang web
+        function updateContent(content) {
+            contentDiv.innerHTML = '';
+            contentDiv.appendChild(content);
+        }
+    </script>
+</body>
+
+</html>

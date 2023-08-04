@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Trang chủ</title>
+    <style>
+          /* CSS styles */
+          body {
+              font-family: Arial, sans-serif;
+              margin: 20px;
+          }
+  
+          .nav-menu {
+              background-color: #f2f2f2;
+              padding: 10px;
+              display: flex;
+              justify-content: space-around;
+              margin-bottom: 20px;
+          }
+  
+          .nav-menu a {
+              text-decoration: none;
+              color: #333;
+              padding: 8px 16px;
+          }
+  
+          .nav-menu a:hover {
+              background-color: #ddd;
+          }
+  
+          .content {
+              padding: 20px;
+          }
+  
+          .content h2 {
+              margin-bottom: 10px;
+          }
+  
+          .book-list, .user-list {
+              list-style: none;
+              padding: 0;
+          }
+  
+          .book-item, .user-item {
+              border: 1px solid #ddd;
+              padding: 10px;
+              margin-bottom: 5px;
+          }
+  
+          .book-title {
+              font-weight: bold;
+          }
+      </style>
+</head>
+<body>
+    <div class="nav-menu">
+        <a href="#" id="home-link">Trang chủ</a>
+        <a href="sach.html" id="books-link"> Thêm Sách</a>
+        <a href="#" id="stories-link">Truyện</a>
+        <a href="#" id="users-link">Người dùng</a>
+    </div>
+    <div class="content" id="content">
+        <h1>Admin - Trang chủ</h1>
+        <p>Xin chào! Đây là trang chủ của trang web Admin. Dưới đây là các thông tin và chức năng chính:</p>
+        <h2>Thông tin:</h2>
+        <ul>
+            <li>Tổng số sách: <span id="total-books">0</span></li>
+            <li>Tổng số truyện: <span id="total-stories">0</span></li>
+            <li>Tổng số người dùng: <span id="total-users">0</span></li>
+        </ul>
+        <h2>Chức năng chính:</h2>
+        <ul>
+            <li>Quản lý Sách: <a href="#" id="manage-books-link">Xem</a></li>
+            <li>Quản lý Truyện: <a href="#" id="manage-stories-link">Xem</a></li>
+            <li>Quản lý Người dùng: <a href="#" id="manage-users-link">Xem</a></li>
+        </ul>
+    </div>
+
+    <script>
+          // Đoạn script để cập nhật thông tin tổng số sách, tổng số truyện và tổng số người dùng
+          document.addEventListener('DOMContentLoaded', function () {
+              // Giả định rằng bạn đã có các hàm để lấy thông tin từ backend (ví dụ: getTotalBooks, getTotalStories, getTotalUsers)
+              // và đã gán giá trị thích hợp vào biến totalBooks, totalStories, totalUsers
+  
+              // Đoạn code dưới đây giả định bạn có 3 biến totalBooks, totalStories và totalUsers đã được khai báo và có giá trị.
+  
+              const totalBooks = 100; // Thay thế giá trị này bằng số sách thực tế
+              const totalStories = 50; // Thay thế giá trị này bằng số truyện thực tế
+              const totalUsers = 200; // Thay thế giá trị này bằng số người dùng thực tế
+  
+              // Cập nhật thông tin tổng số sách, tổng số truyện và tổng số người dùng vào các thẻ HTML tương ứng
+              document.getElementById('total-books').textContent = totalBooks;
+              document.getElementById('total-stories').textContent = totalStories;
+              document.getElementById('total-users').textContent = totalUsers;
+          });
+      </script>
+</body>
+</html>
